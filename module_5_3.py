@@ -41,16 +41,15 @@ class House:
 
     def __add__(self, value):
         if isinstance(value, int):
-            return House(self.name, self.number_of_floors + value)
+            self.number_of_floors += value
+            return self
         return NotImplemented
 
     def __radd__(self, value):
         return self.__add__(value)
 
     def __iadd__(self, value):
-        if isinstance(value, int):
-            self.number_of_floors += value
-        return self
+        return self.__add__(value)
 
     def go_to(self, floor):
         if floor > self.number_of_floors or floor < 1:
@@ -68,7 +67,7 @@ print(house_2)
 
 print(house_1 == house_2)  # __eq__
 
-house_1 = house_1 + 78  # __add__
+house_1 = house_1 + 5  # __add__
 print(house_1)
 print(house_1 == house_2)
 
